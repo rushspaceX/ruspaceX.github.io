@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.ico" class="icon" />
+  <title>Travel Packs</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-image: linear-gradient(to right, #92fe9d 0%, #00c9ff 100%);
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    .tra {
+      font-size: 4rem;
+      margin-bottom: 2rem;
+    }
+
+    .sun {
+      width: 100%;
+      max-width: 40rem; /* Adjust max-width as per your design */
+      height: 10rem;
+      font-size: 2rem;
+      border-radius: 2rem;
+      margin: 1rem auto;
+      padding: 2rem;
+      background-image: url('pexels-kindel-media-7476134.jpg');
+      box-shadow: 0 0 10px hsla(180, 80%, 73%, 0.925);
+      border: none;
+      display: block;
+      position: relative;
+      animation: sunBounce 1s ease-in-out infinite alternate;
+    }
+
+    .font {
+      font-size: 2rem;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      color: #e9defa;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .font2 {
+      color: #e9defa;
+      font-size: 1.5rem;
+      position: absolute;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .seemore {
+      display: block;
+      font-size: 1.5rem;
+      margin-top: 3rem;
+      text-decoration: underline;
+      color: #f1f8fc;
+    }
+
+    @keyframes sunBounce {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(10px);
+      }
+    }
+
+    @media only screen and (max-width: 768px) {
+      .sun {
+        max-width: 80%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="tra">TRAVEL PACKS FOR YOU 🪐</div>
+    <button class="sun">
+      <div class="font">The Sun Journey Tour Pack 🔆</div>
+      <div class="font2">•Only 700$</div>
+    </button>
+    <button class="sun">
+      <div class="font">The Senasuru Journey Tour Pack</div>
+      <div class="font2">•Only 800$</div>
+    </button>
+    <button class="sun">
+      <div class="font">The Nepchune Journey Tour Pack</div>
+      <div class="font2">•Only 1000$</div>
+    </button>
+    <button class="sun">
+      <div class="font">The Brahaspathi Journey Tour Pack</div>
+      <div class="font2">•Only 1700$</div>
+    </button>
+    <button class="sun">
+      <div class="font">The Agaharu Journey Tour Pack</div>
+      <div class="font2">•Only 2000$</div>
+    </button>
+    <span class="seemore">See More</span>
+  </div>
+</body>
+</html>

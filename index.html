@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Space Ticket Booking</title>
+  <link rel="icon" href="favicon.ico" class="icon" />
+  <style>
+    /* General styles */
+    * {
+      box-sizing: border-box; /* Include padding and border in element's total width and height */
+    }
+
+    /* Body styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: linear-gradient(to top, #ff0844 0%, #ffb199 100%);
+      min-height: 100vh; /* Ensure the body fills the viewport */
+      display: flex;
+      flex-direction: column; /* Stack child elements vertically */
+      position: relative; /* Ensure proper positioning of absolute elements */
+    }
+   
+   
+
+
+    /* Header styles */
+    .header {
+      background-color: transparent;
+      width: 85%;
+      max-width: 800px; /* Limit header width for better readability */
+      height: auto;
+      color: whitesmoke;
+      padding: 10px;
+      border-radius: 4rem;
+      font-size: 6rem;
+      text-align: center; /* Center text */
+      margin: 8rem auto 3rem; /* Center header vertically and horizontally */
+      border: groove #b16023;
+      cursor: pointer;
+      animation: fadeIn 2s ease-in-out, cursorPop 1s infinite alternate; /* Combining animations */
+      transition: transform 0.2s ease-in-out; /* Added transition for iOS-themed animation */
+      position: relative; /* Ensure proper stacking order */
+      z-index: 1; /* Ensure header is on top of the video */
+    }
+
+    .header:hover {
+      transform: scale(1.1); /* Added hover effect for iOS-themed animation */
+    }
+
+    /* Booking form styles */
+    .booking {
+      width: 75%;
+      max-width: 800px; /* Limit form width */
+      margin: 0 auto 3rem; /* Center form horizontally */
+      padding: 0 20px; /* Add horizontal padding for better spacing */
+      position: relative; /* Ensure proper stacking order */
+      z-index: 1; /* Ensure form is on top of the video */
+    }
+
+    form {
+      border-radius: 0.5rem;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+    }
+
+    label {
+      margin-top: 10px;
+      border-radius: 0.5rem;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    button {
+      margin-top: 5px;
+      padding: 10px; /* Increase padding for better touch targets */
+      font-size: 1rem;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* Results section styles */
+    #results {
+      margin-top: 20px;
+    }
+
+    /* Footer styles */
+    .footer {
+      background-color: hsla(0, 0%, 100%, 0.442);
+      padding: 20px;
+      border-radius: 2rem;
+      text-align: center; /* Center text */
+      margin-top: auto; /* Push footer to the bottom */
+      position: relative; /* Ensure proper stacking order */
+      z-index: 1; /* Ensure footer is on top of the video */
+    }
+
+    /* Media queries for responsive design */
+    @media (max-width: 768px) {
+      .header {
+        font-size: 3rem;
+        margin-top: 4rem; /* Adjust header margin for smaller screens */
+      }
+      .booking {
+        width: 90%; /* Adjust form width for smaller screens */
+        padding: 0 10px; /* Adjust padding for smaller screens */
+      }
+      input[type="text"],
+      input[type="date"],
+      button {
+        font-size: 0.8rem;
+      }
+      .plants {
+        margin: 1rem auto; /* Adjust margin for smaller screens */
+        padding: 0 10px; /* Adjust padding for smaller screens */
+      }
+      .plants h2 {
+        font-size: 1.5rem; /* Decrease font size for smaller screens */
+      }
+      .plants li {
+        font-size: 1rem; /* Decrease font size for smaller screens */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header {
+        font-size: 2rem;
+        margin-top: 3rem; /* Adjust header margin for smaller screens */
+      }
+      .footer {
+        padding: 10px; /* Adjust padding for smaller screens */
+      }
+    }
+
+    .plants {
+      margin: 2rem auto;
+      max-width: 800px; /* Limiting the width for better readability */
+    }
+
+    .plants h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: whitesmoke;
+    }
+
+    .plants ul {
+      list-style: none; /* Remove default bullet points */
+      padding: 0;
+    }
+
+    .plants li {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .plants li:before {
+      content: "\2022"; /* Using a bullet point as list item marker */
+      color: #30cfd0; /* Custom color */
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+
+    .searching {
+      margin-top: 3rem; /* Adjusted margin-top */
+      text-align: center; /* Adjusted to center align */
+    }
+
+    .search {
+      margin-bottom: 1rem; /* Added margin-bottom for spacing between buttons */
+      overflow: hidden;
+      position: relative;
+      display: inline-block;
+    }
+
+    .search a {
+      text-decoration: none; /* Remove underline from links */
+      color: black; /* Set text color */
+      padding: 0.5rem 1rem; /* Added padding for button */
+      border: none; /* Removed border */
+      border-radius: 50px; /* Added border-radius for round shape */
+      background-color: #d3d3d3f1; /* Added background color for button */
+      transition: transform 0.3s, color 0.3s; /* Added transition effect */
+      border-style: none;
+      position: relative;
+      z-index: 1;
+    }
+
+    .search a:hover {
+      color: white; /* Change text color on hover */
+    }
+
+    .search a::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 300%;
+      height: 300%;
+      background-color: gray;
+      border-radius: 50%;
+      transition: transform 0.3s;
+      z-index: 0;
+      transform: translate(-50%, -50%) scale(0);
+    }
+
+    .search.clicked a::before {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    /* Style for the panel */
+    .panel {
+      display: none;
+      background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
+      padding: 30px;
+      border-radius: 70px;
+      margin-top: 20px;
+     
+    }
+    .list{
+
+     color: whitesmoke;
+
+
+    }
+
+    /* Styling for the video */
+    video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1; /* Ensure video is behind other content */
+    }
+
+    /* Responsive styling */
+    @media (max-width: 768px) {
+      /* Adjust video size for smaller screens */
+      video {
+          width: 100%;
+          height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Video background -->
+  <video autoplay muted loop>
+    <source src="47294-451099743.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="searching">
+    <!-- Button to toggle panel -->
+    <button id="togglePanel" class="search">&nbsp;see</button>
+    <button class="search"><a href="index.html">Home</a></button>
+    <button class="search"><a href="Trvel.html">Travel packs</a></button>
+    <button class="search"><a href="Loging.html">Login</a> </button>
+    <button class="search"><a href="https://flowcv.me/rushan9999webside">About</a></button>
+    <div id="panel" class="panel">
+      <p>Unlimited Transport&nbsp;|&nbsp;Services.</p>
+    </div>
+  </div>
+
+  <div class="header">SpaceX Ticket Booking</div>
+
+  <div class="booking">
+    <form id="booking-form">
+      <label for="from">From:</label>
+      <input type="text" id="from" name="from" required>
+      <label for="to">To:</label>
+      <input type="text" id="to" name="to" required>
+      <label for="date">Date:</label>
+      <input type="date" id="date" name="date" required>
+      <button type="submit" class="batu">Search Flights</button>
+    </form>
+    <div id="results" class="id"></div>
+  </div>
+
+  <div class="plants">
+    <h2>Plants Available:</h2>
+    <ul class="list">
+      <li>Sun</li>
+      <li>Sensuru</li>
+      <li>Urenas</li>
+      <li>Brehaspathi</li>
+      <li>Ahagru</li>
+      <li>Nepchune</li>
+      <li>Moon</li>
+      <!-- Add more plant names here -->
+    </ul>
+  </div>
+
+  <div class="footer">
+    &copy; 2024 Plant Booking System &nbsp; | All  created By Rumesh.
+  </div>
+
+  <script>
+    // JavaScript to toggle panel visibility
+    document.getElementById('togglePanel').addEventListener('click', function() {
+        var panel = document.getElementById('panel');
+        panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
+    });
+
+    // JavaScript to handle form submission
+    document.getElementById('booking-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const from = document.getElementById('from').value;
+        const to = document.getElementById('to').value;
+        const date = document.getElementById('date').value;
+      
+        // Here you can implement logic to search for flights based on the user input
+        // For this example, we'll just display a message with the search criteria
+        const resultsDiv = document.getElementById('results');
+        resultsDiv.innerHTML = `<p>Searching flights from ${from} to ${to} on ${date}...</p>`;
+        
+        // Show success message
+        alert('You have successfully booked your SpaceX Tour!');
+    });
+
+    // JavaScript to toggle animation class on button click
+    const searchElement = document.querySelector('.search');
+    searchElement.addEventListener('click', function() {
+        this.classList.toggle('clicked');
+    });
+  </script>
+</body>
+</html>
